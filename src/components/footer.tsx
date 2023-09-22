@@ -31,27 +31,12 @@ const links = [
   {
     icon: DiGithubBadge,
     label: 'GitHub',
-    href: 'https://github.com/segunadebayo',
+    href: 'https://github.com/dbpunk-labs/octopus',
   },
   {
     icon: IoLogoTwitter,
     label: 'Twitter',
-    href: 'https://twitter.com/thesegunadebayo',
-  },
-  {
-    icon: IoLogoLinkedin,
-    label: 'LinkedIn',
-    href: 'https://linkedin.com/in/thesegunadebayo/',
-  },
-  {
-    icon: MdEmail,
-    label: 'Email',
-    href: 'mailto:sage@adebayosegun.com',
-  },
-  {
-    icon: FaYoutube,
-    label: 'YouTube',
-    href: 'https://www.youtube.com/channel/UC4TmDovH46TB4S0SM0Y4CIg',
+    href: 'https://twitter.com/OCopilot7817',
   },
 ]
 
@@ -82,13 +67,6 @@ const NigeriaFlag = (props) => (
 
 export const Footer = (props: StackProps) => (
   <VStack as='footer' spacing={4} mt={12} textAlign='center' {...props}>
-    <Text fontSize='sm'>
-      <span>
-        {t('component.footer.proudly-made-in')}
-        <NigeriaFlag />
-      </span>
-      <span>by Segun Adebayo</span>
-    </Text>
     <Stack mt={4} direction='row' spacing='12px' justify='center'>
       {links.map((link) => (
         <FooterLink key={link.href} {...link} />

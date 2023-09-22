@@ -16,10 +16,9 @@ import { useScroll } from 'framer-motion'
 import NextLink from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { FaMoon, FaSun, FaYoutube } from 'react-icons/fa'
-import Logo, { LogoIcon } from './logo'
+import { Image } from '@chakra-ui/react'
+import {Logo, LogoIcon } from './logo'
 import { MobileNavButton, MobileNavContent } from './mobile-nav'
-import Search from './omni-search'
-import SponsorButton from './sponsor-button'
 import VersionSwitcher from './version-switcher'
 import { DiscordIcon, GithubIcon } from 'components/icons'
 import siteConfig from 'configs/site-config.json'
@@ -41,15 +40,8 @@ function HeaderContent() {
     <>
       <Flex w='100%' h='100%' px='6' align='center' justify='space-between'>
         <Flex align='center'>
-          <NextLink href='/' passHref>
-            <chakra.a display='block' aria-label='Chakra UI, Back to homepage'>
-              <Logo display={{ base: 'none', md: 'block' }} />
-              <Box minW='3rem' display={{ base: 'block', md: 'none' }}>
-                <LogoIcon />
-              </Box>
-            </chakra.a>
-          </NextLink>
-        </Flex>
+          <Image src='octopus-logo.png' />
+          </Flex>
 
         <Flex
           justify='flex-end'
@@ -58,17 +50,11 @@ function HeaderContent() {
           color='gray.400'
           maxW='1100px'
         >
-          <Search />
-          <VersionSwitcher
-            width='auto'
-            flexShrink={0}
-            display={{ base: 'none', md: 'flex' }}
-          />
           <HStack spacing='5' display={{ base: 'none', md: 'flex' }}>
             <Link
               isExternal
-              aria-label='Go to Chakra UI GitHub page'
-              href={siteConfig.repo.url}
+              aria-label='GitHub page'
+              href="https://github.com/dbpunk-labs/octopus"
             >
               <Icon
                 as={GithubIcon}
@@ -81,8 +67,8 @@ function HeaderContent() {
             </Link>
             <Link
               isExternal
-              aria-label='Go to Chakra UI Discord page'
-              href='/discord'
+              aria-label='Discord page'
+              href='https://discord.gg/UjSHsjaz66'
             >
               <Icon
                 as={DiscordIcon}
@@ -93,38 +79,8 @@ function HeaderContent() {
                 _hover={{ color: 'gray.600' }}
               />
             </Link>
-            <Link
-              isExternal
-              aria-label='Go to Chakra UI YouTube channel'
-              href={siteConfig.youtube}
-            >
-              <Icon
-                as={FaYoutube}
-                display='block'
-                transition='color 0.2s'
-                w='5'
-                h='5'
-                _hover={{ color: 'gray.600' }}
-              />
-            </Link>
           </HStack>
           <HStack spacing='5'>
-            <IconButton
-              size='md'
-              fontSize='lg'
-              aria-label={`Switch to ${text} mode`}
-              variant='ghost'
-              color='current'
-              ml={{ base: '0', md: '3' }}
-              onClick={toggleMode}
-              icon={<SwitchIcon />}
-            />
-            <SponsorButton ml='5' />
-            <MobileNavButton
-              ref={mobileNavBtnRef}
-              aria-label='Open Menu'
-              onClick={mobileNav.onOpen}
-            />
           </HStack>
         </Flex>
       </Flex>

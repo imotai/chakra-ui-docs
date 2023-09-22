@@ -122,6 +122,9 @@ dependencies:
   react-focus-lock:
     specifier: ^2.6.0
     version: 2.9.2(@types/react@18.0.17)(react@18.2.0)
+  react-helmet:
+    specifier: ^6.1.0
+    version: 6.1.0(react@18.2.0)
   react-icons:
     specifier: ^4.4.0
     version: 4.4.0(react@18.2.0)
@@ -11290,6 +11293,18 @@ packages:
       use-sidecar: 1.1.2(@types/react@18.0.17)(react@18.2.0)
     dev: false
 
+  /react-helmet@6.1.0(react@18.2.0):
+    resolution: {integrity: sha512-4uMzEY9nlDlgxr61NL3XbKRy1hEkXmKNXhjbAIOVw5vcFrsdYbH2FEwcNyWvWinl103nXgzYNlns9ca+8kFiWw==}
+    peerDependencies:
+      react: '>=16.3.0'
+    dependencies:
+      object-assign: 4.1.1
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-fast-compare: 3.2.1
+      react-side-effect: 2.1.2(react@18.2.0)
+    dev: false
+
   /react-icons@4.4.0(react@18.2.0):
     resolution: {integrity: sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==}
     peerDependencies:
@@ -11392,6 +11407,14 @@ packages:
 
   /react-responsive-masonry@2.1.5:
     resolution: {integrity: sha512-qXoE8Whrgw2smNRKAcX2z+kZDH7uiii1uyJ92cMOpe59CGdMbj7qbT9I9540GKxFLVUYr9zlU4n4lCfsfy+09A==}
+    dev: false
+
+  /react-side-effect@2.1.2(react@18.2.0):
+    resolution: {integrity: sha512-PVjOcvVOyIILrYoyGEpDN3vmYNLdy1CajSFNt4TDsVQC5KpTijDvWVoR+/7Rz2xT978D8/ZtFceXxzsPwZEDvw==}
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-simple-code-editor@0.11.3(react-dom@18.2.0)(react@18.2.0):
