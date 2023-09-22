@@ -18,6 +18,9 @@ import {
   WrapItem,
   chakra,
 } from '@chakra-ui/react'
+
+import {  LinkOverlay } from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react'
 import { chunk } from '@chakra-ui/utils'
 import users from 'chakra-users'
 import { Image } from '@chakra-ui/react'
@@ -48,6 +51,8 @@ import { getDiscordMembers } from 'utils/get-discord-members'
 import { getGithubStars } from 'utils/get-github-stars'
 import { getNpmDownloads } from 'utils/get-npm-downloads'
 import { t } from 'utils/i18n'
+import dynamic from 'next/dynamic'
+const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 
 const Feature = ({ title, icon, children, ...props }) => {
@@ -135,6 +140,16 @@ const HomePage = ({
   npmDownloads,
   discordMembers,
 }: HomePageProps) => {
+
+    const [playing, setPlaying] = React.useState(false)
+	const [openVideo, setOpenVideo] = React.useState(false)
+
+	function play() {
+		setPlaying(true)
+		setOpenVideo(true)
+	}
+
+
   return (
     <>
       <SEO
@@ -197,10 +212,24 @@ const HomePage = ({
             </Container>
         </Box>
 
-        <Box as='section'>
+        <Box as='section' onClick={play} display={{base:!openVideo ? 'block' : 'none'}}>
           <Container py='80px'>
             <Flex direction='column' align='center' maxW='1200px' mx='auto'>
-                <Image src='octopus_demo_dark.png' alt='Dan Abramov' />
+              <LinkOverlay href='#'>
+              <Image src='octopus_demo_dark.png' />
+              </LinkOverlay>
+            </Flex>
+          </Container>
+        </Box>
+
+        <Box as='section' display={{base:openVideo ? 'block' : 'none'}}>
+          <Container py='80px'>
+            <Flex direction='column' align='center' maxW='1200px' mx='auto'>
+              <ReactPlayer
+              width="1158px"
+              height="650px"
+				playing={playing}
+				url='https://www.youtube.com/watch?v=CXn9trD6awc&t=1s'/>
             </Flex>
           </Container>
         </Box>
