@@ -72,7 +72,6 @@ export const Footer = (props: StackProps) => (
         <FooterLink key={link.href} {...link} />
       ))}
     </Stack>
-    <VercelCallout />
   </VStack>
 )
 
