@@ -226,8 +226,8 @@ const HomePage = ({
           <Container py='80px'>
             <Flex direction='column' align='center' maxW='1200px' mx='auto'>
               <ReactPlayer
-              width="1158px"
-              height="650px"
+                width="100%"
+                height="640px"
 				playing={playing}
 				url='https://www.youtube.com/watch?v=CXn9trD6awc&t=1s'/>
             </Flex>
