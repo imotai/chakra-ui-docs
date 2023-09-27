@@ -7,41 +7,34 @@ import {
   IconButton,
   Link,
   chakra,
-  useColorMode,
-  useColorModeValue,
   useDisclosure,
   useUpdateEffect,
 } from '@chakra-ui/react'
 import { useScroll } from 'framer-motion'
-import NextLink from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import { FaMoon, FaSun, FaYoutube } from 'react-icons/fa'
 import { Image } from '@chakra-ui/react'
 import {Logo, LogoIcon } from './logo'
 import { MobileNavButton, MobileNavContent } from './mobile-nav'
-import VersionSwitcher from './version-switcher'
 import { DiscordIcon, GithubIcon } from 'components/icons'
-import siteConfig from 'configs/site-config.json'
 
 function HeaderContent() {
   const mobileNav = useDisclosure()
-
-  const { toggleColorMode: toggleMode } = useColorMode()
-
-  const text = useColorModeValue('dark', 'light')
-  const SwitchIcon = useColorModeValue(FaMoon, FaSun)
   const mobileNavBtnRef = useRef<HTMLButtonElement>()
-
   useUpdateEffect(() => {
     mobileNavBtnRef.current?.focus()
   }, [mobileNav.isOpen])
-
   return (
     <>
       <Flex w='100%' h='100%' px='6' align='center' justify='space-between'>
-        <Flex align='center'>
-          <Image src='octopus-logo.png' />
+            <Link
+              isExternal
+              aria-label='home'
+              href="/"
+            >
+           <Flex align='center'>
+             <Image src='octogen_logo_text_min.png' />
           </Flex>
+          </Link>
 
         <Flex
           justify='flex-end'

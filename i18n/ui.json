@@ -2,9 +2,9 @@
   "homepage": {
     "title": {
       "main": "Harness the power of 5 million Python libraries",
-      "highlighted": "with Octopus"
+      "highlighted": "with Octogen"
     },
-    "message": "Octopus is an open-source code interpreter powered by GPT3.5/4 and CodeLlama",
+    "message": "Octogen is an open-source code interpreter powered by GPT4 and CodeLlama",
     "get-started": "Join The Waitlist",
     "supported-and-backed-by": "Supported and Backed by",
     "your-company": "Your company",
@@ -69,8 +69,8 @@
       "invite-us-to-speak": "Invite us to speak"
     },
     "seo": {
-      "title": "Octopus, an open-source code interpreter powered by GPT3.5/4 and CodeLlama",
-      "description": "LLM, Code Interpreter"
+      "title": "Octogen, an open-source code interpreter powered by GPT4 and CodeLlama",
+      "description": "GPT4, Code Interpreter, CodeLlama"
     }
   },
   "notfound": {

@@ -17,9 +17,26 @@ import {
   Wrap,
   WrapItem,
   chakra,
+  Input,
+  Select,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  FormLabel,
+    Alert,
+  AlertIcon,
+  AlertTitle,
 } from '@chakra-ui/react'
 
 import {  LinkOverlay } from '@chakra-ui/react'
+import { BsFillHeartFill, BsWindows} from 'react-icons/bs'
+import { GrUbuntu} from 'react-icons/gr'
+import { ImAppleinc} from 'react-icons/im'
+
 import { useDisclosure } from '@chakra-ui/react'
 import { chunk } from '@chakra-ui/utils'
 import users from 'chakra-users'
@@ -37,7 +54,7 @@ import { App, Index } from 'configs/sandpack-contents/homepage/files'
 import tweets from 'configs/tweets.json'
 import NextLink from 'next/link'
 import * as React from 'react'
-import { AiFillThunderbolt } from 'react-icons/ai'
+import { AiFillThunderbolt, AiFillBug } from 'react-icons/ai'
 import { DiGithubBadge } from 'react-icons/di'
 import { FaArrowRight, FaDiscord, FaMicrophone } from 'react-icons/fa'
 import { FiDownload, FiGithub, FiUsers } from 'react-icons/fi'
@@ -143,12 +160,15 @@ const HomePage = ({
 
     const [playing, setPlaying] = React.useState(false)
 	const [openVideo, setOpenVideo] = React.useState(false)
-
+    const { isOpen, onOpen, onClose } = useDisclosure()
 	function play() {
 		setPlaying(true)
 		setOpenVideo(true)
 	}
 
+    const [userEmail, setUserEmail] = React.useState("")
+    const [userPreferModel, setUserPreferModel] = React.useState("GPT4")
+    const [userPreferAgent, setUserPreferAgentType] = React.useState("A1")
 
   return (
     <>
@@ -157,6 +177,60 @@ const HomePage = ({
         description={t('homepage.seo.description')}
       />
       <Header />
+      <Drawer
+        isOpen={isOpen}
+        placement='right'
+        onClose={onClose}
+        size='xl'
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth='1px'>
+          Apply Agent Service Key
+          </DrawerHeader>
+
+          <DrawerBody>
+
+            <Stack spacing='24px'>
+              <Box>
+                <FormLabel htmlFor='username'>Email</FormLabel>
+                <Input
+                  id='email'
+                  placeholder='Please enter your mail'
+                  value={userEmail}
+                  onChange={(e)=> {setUserEmail(e.target.value)}}
+                />
+              </Box>
+
+              <Box>
+                <FormLabel htmlFor='url'>Your Prefer Model</FormLabel>
+                    <Select id='model' value={userPreferModel} onChange={(e)=> {setUserPreferModel(e.target.value)}}>
+                          <option value='GPT4'>GPT4</option>
+                          <option value='CodeLlama'>CodeLlama</option>
+                    </Select>
+                </Box>
+              <Box>
+                <FormLabel htmlFor='owner'>Your Prefer Agent Type</FormLabel>
+                <Select id='agent' value={userPreferAgent} onChange={(e) => {setUserPreferAgentType(e.target.value)}}>
+                  <option value='A1'>1 CPU 1GB</option>
+                  <option value='A2'>2 CPU 2GB</option>
+                  <option value='A3'>2 CPU 4GB + GPU</option>
+                </Select>
+              </Box>
+
+            </Stack>
+          </DrawerBody>
+
+          <DrawerFooter borderTopWidth='1px'>
+            <Button variant='outline' mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme='blue'>Submit</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+
       <Box mb={10}>
         <Box as='section' pt='3rem' pb={{ base: '0', md: '0rem' }}>
           <Container>
@@ -172,7 +246,7 @@ const HomePage = ({
                 lineHeight='1.2'
               >
                 {t('homepage.title.main')}
-                <Box as='span' color='teal.500' _dark={{ color: 'teal.300' }}>
+                <Box as='span' color='teal.500' _dark={{ color: '#0750c1' }}>
                   {' '}
                   {t('homepage.title.highlighted')}
                 </Box>
@@ -201,27 +275,47 @@ const HomePage = ({
                 fontSize='1.2rem'
                 as='a'
                 size='lg'
-                href='https://github.com/dbpunk-labs/octopus#getting-started'
-                colorScheme='teal'
-                target='__blank'
-                rightIcon={<FaArrowRight fontSize='0.8em' />}>
-                 Get Started
+                colorScheme='blue'
+                onClick={onOpen}
+                >
+                Apply Agent Service Key
               </Button>
+               <Button
+                  as='a'
+                  size='lg'
+                  h='4rem'
+                  px='40px'
+                  fontSize='1.2rem'
+                  href='https://github.com/dbpunk-labs/octogen'
+                  target='__blank'
+                  leftIcon={<DiGithubBadge size='1.5em' />}
+                >
+                 GitHub
+                </Button>
               </Stack>
             </Box>
+            <Center>
+              <Box
+                display='inline-block'
+                mt='10px'
+                px='6'
+                py='4'
+              >
+                <Icon as={BsWindows} boxSize={8} mr="5px" color="#0750c1"/>
+                <Icon as={GrUbuntu} boxSize={8} mr="5px" color="#0750c1"/>
+                <Icon as={ImAppleinc} boxSize={8} mr="5px" color="#0750c1"/>
+              </Box>
+            </Center>
             </Container>
         </Box>
 
-        <Box as='section' onClick={play} display={{base:!openVideo ? 'block' : 'none'}}>
-          <Container py='80px'>
+        <Box as='section'  display={{base:!openVideo ? 'block' : 'none'}}>
+          <Container py='20px' >
             <Flex direction='column' align='center' maxW='1200px' mx='auto'>
-              <LinkOverlay href='#'>
-              <Image src='octopus_demo_dark.png' />
-              </LinkOverlay>
+              <Image src='octopus_demo_dark.png' onClick={play}/>
             </Flex>
           </Container>
         </Box>
-
         <Box as='section' display={{base:openVideo ? 'block' : 'none'}}>
           <Container py='80px'>
             <Flex direction='column' align='center' maxW='1200px' mx='auto'>
@@ -233,6 +327,7 @@ const HomePage = ({
             </Flex>
           </Container>
         </Box>
+
         <Footer />
       </Box>
     </>
