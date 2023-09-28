@@ -196,7 +196,7 @@ const HomePage = ({
         }else {
            toast({
                   title: 'Request trial key',
-                  description: "Requesting the trial key failed",
+                  description: content.msg,
                   status: 'error',
                   duration: 2000,
                   isClosable: true,
