@@ -31,7 +31,7 @@ const links = [
   {
     icon: DiGithubBadge,
     label: 'GitHub',
-    href: 'https://github.com/dbpunk-labs/octopus',
+    href: 'https://github.com/dbpunk-labs/octogen',
   },
   {
     icon: IoLogoTwitter,

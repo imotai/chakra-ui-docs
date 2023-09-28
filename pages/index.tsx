@@ -30,13 +30,14 @@ import {
     Alert,
   AlertIcon,
   AlertTitle,
+  useToast,
 } from '@chakra-ui/react'
 
 import {  LinkOverlay } from '@chakra-ui/react'
 import { BsFillHeartFill, BsWindows} from 'react-icons/bs'
 import { GrUbuntu} from 'react-icons/gr'
 import { ImAppleinc} from 'react-icons/im'
-
+import { useAsyncFn } from 'react-use'
 import { useDisclosure } from '@chakra-ui/react'
 import { chunk } from '@chakra-ui/utils'
 import users from 'chakra-users'
@@ -157,6 +158,8 @@ const HomePage = ({
   npmDownloads,
   discordMembers,
 }: HomePageProps) => {
+    const toast = useToast()
+
 
     const [playing, setPlaying] = React.useState(false)
 	const [openVideo, setOpenVideo] = React.useState(false)
@@ -165,11 +168,42 @@ const HomePage = ({
 		setPlaying(true)
 		setOpenVideo(true)
 	}
-
     const [userEmail, setUserEmail] = React.useState("")
     const [userPreferModel, setUserPreferModel] = React.useState("GPT4")
     const [userPreferAgent, setUserPreferAgentType] = React.useState("A1")
+    const [submitRet, submitTral] = useAsyncFn(async () => {
+        const response = await fetch("https://user.octogen.dev/waitlist/join",
+            {
 
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({email:userEmail, model: userPreferModel, agent: userPreferAgent})
+            }
+        )
+        const content = await response.json()
+        if (content.code == 0) {
+            toast({
+                  title: 'Request trial key',
+                  description: "You has requested the trial key successfully",
+                  status: 'success',
+                  duration: 2000,
+                  isClosable: true,
+            })
+            onClose()
+        }else {
+           toast({
+                  title: 'Request trial key',
+                  description: "Requesting the trial key failed",
+                  status: 'error',
+                  duration: 2000,
+                  isClosable: true,
+            })
+           onClose()
+        }
+     },[userPreferModel, userPreferAgent, userEmail])
   return (
     <>
       <SEO
@@ -187,11 +221,9 @@ const HomePage = ({
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth='1px'>
-          Apply Agent Service Key
+          Request the agent service trial key
           </DrawerHeader>
-
           <DrawerBody>
-
             <Stack spacing='24px'>
               <Box>
                 <FormLabel htmlFor='username'>Email</FormLabel>
@@ -204,14 +236,14 @@ const HomePage = ({
               </Box>
 
               <Box>
-                <FormLabel htmlFor='url'>Your Prefer Model</FormLabel>
+                <FormLabel htmlFor='url'>Your Prefered Model</FormLabel>
                     <Select id='model' value={userPreferModel} onChange={(e)=> {setUserPreferModel(e.target.value)}}>
                           <option value='GPT4'>GPT4</option>
                           <option value='CodeLlama'>CodeLlama</option>
                     </Select>
                 </Box>
               <Box>
-                <FormLabel htmlFor='owner'>Your Prefer Agent Type</FormLabel>
+                <FormLabel htmlFor='owner'>Your Prefered Agent Type</FormLabel>
                 <Select id='agent' value={userPreferAgent} onChange={(e) => {setUserPreferAgentType(e.target.value)}}>
                   <option value='A1'>1 CPU 1GB</option>
                   <option value='A2'>2 CPU 2GB</option>
@@ -226,7 +258,9 @@ const HomePage = ({
             <Button variant='outline' mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme='blue'>Submit</Button>
+            <Button colorScheme='blue' onClick={(e)=> { 
+                submitTral()
+            }}>Submit</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
@@ -276,9 +310,9 @@ const HomePage = ({
                 as='a'
                 size='lg'
                 colorScheme='blue'
-                onClick={onOpen}
+                href='https://docs.octogen.dev/getstarted.html'
                 >
-                Apply Agent Service Key
+                Getting Started
               </Button>
                <Button
                   as='a'
@@ -286,11 +320,9 @@ const HomePage = ({
                   h='4rem'
                   px='40px'
                   fontSize='1.2rem'
-                  href='https://github.com/dbpunk-labs/octogen'
-                  target='__blank'
-                  leftIcon={<DiGithubBadge size='1.5em' />}
+                  onClick={onOpen}
                 >
-                 GitHub
+                Get Agent Service Trial key
                 </Button>
               </Stack>
             </Box>

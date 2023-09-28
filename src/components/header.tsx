@@ -47,7 +47,7 @@ function HeaderContent() {
             <Link
               isExternal
               aria-label='GitHub page'
-              href="https://github.com/dbpunk-labs/octopus"
+              href="https://github.com/dbpunk-labs/octogen"
             >
               <Icon
                 as={GithubIcon}
